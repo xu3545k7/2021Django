@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        {% if request.user.is_authenticated %}
+          {{ request.user.first_name }}
+        {% else %}
+          首頁
+        {% endif %}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">群</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              我的練習
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="/news/">新聞摘要</a></li>
+              <li><a class="dropdown-item" href="/rank/">國際城市人口排行</a></li>
+              <li><a class="dropdown-item" href="/chart/">人口統計圖表</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="https://github.com/skynettw/ai202107">老師的github</a></li>
+              <li><a class="dropdown-item" href="/admin/">管理後臺</a></li>
+            </ul>
+          </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/" tabindex="-1">登出</a>
+            </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/login/?next=/" tabindex="-1">登入</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %} 城市人口數 {% endblock %}
+{% block headmessage %} 國際城市人口排行表 {{name}} {% endblock %}
+{% block main %}
+<hr>
+  <!-- {{ countries}}<br> -->
+  <form action="/rank/" method=POST>  
+      <select name="id">
+          <option value="999">請選擇一個國家</option>
+          {% for country in countries %}
+          <option value="{{country.id}}">{{country.name}}</option>
+          {% endfor %}
+      </select>
+      {% csrf_token %}
+      <input type='submit' value="送出">
+  </form>
+  <table class="table table-striped">
+    <tr class="table-primary"><td colspan="5" align=center><h3>主要國際城市人口排行</h3></td></tr>
+    <tr class="table-dark">
+        <td align="left"><h5>城市</h5></td>
+        <td><h5>國家</h5></td>
+        <td><h5>人口</h5></td>
+    </tr>
+    {% for city in cities %}
+    <tr>
+        <td>{{ city.name }}</td>
+        <td>{{ city.country }}</td>
+        <td>{{ city.population }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
